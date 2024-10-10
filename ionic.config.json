@@ -1,0 +1,8 @@
+{
+  "name": "JelleMobileApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "14e80bad"
+}
