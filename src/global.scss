@@ -35,3 +35,16 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
+
+
+.form-label {
+  font-weight: bold;
+}
+
+input[type="number"] {
+    width: 75px;
+}
+
+.custom-width {
+    width: 75px !important;
+}
