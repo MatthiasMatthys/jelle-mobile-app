@@ -16,7 +16,7 @@
   <div class="p-3">
     <div class="row mb-3">
       <div class="text-end">
-        <button type="button" class="btn btn-primary" (click)="addRow()">+</button>
+        <button type="button" class="btn btn-primary btn-sm" (click)="addRow()">+</button>
       </div>
     </div>
     <div *ngFor="let row of rows; let i = index" class="row cloneable-row mb-3">
@@ -32,16 +32,19 @@
         <input class="form-control" [(ngModel)]="row.aantalRamen" type="number">
       </div>
     </div>
-    <div class="fixed-bottom row p-3">
-      <div class="col">
-        <button type="button" class="btn btn-primary" (click)="calculate()">Calculate</button>
+    <div class="fixed-bottom row d-flex align-items-center justify-content-between p-2">
+      <div class="col-auto">
+        <button type="button" class="btn btn-primary btn-sm" (click)="calculate()">Calculate</button>
       </div>
       <div class="col-auto">
-        <div class="input-group">
+        <div class="input-group input-group-sm">
           <label class="form-label pt-2 pe-2">TOTAAL:</label>
           <input class="form-control custom-width" [(ngModel)]="total" disabled type="number" step=".01">
           <span class="input-group-text">m</span>
         </div>
+      </div>
+      <div class="col-auto">
+        <button type="button" class="btn btn-primary btn-sm" (click)="save()">Save</button>
       </div>
     </div>
   </div>
