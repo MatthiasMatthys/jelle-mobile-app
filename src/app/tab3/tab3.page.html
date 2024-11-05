@@ -6,11 +6,25 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">History</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
+<ion-content>
+  <ion-list>
+    <!-- Outer loop: Iterate over each calculation -->
+    <ion-item *ngFor="let calc of calculations; let i = index">
+      <ion-label>
+        <h2>{{calc.title}}</h2>
+        <p><strong>Total:</strong> {{ calc.total }}</p>
+        <p><strong>Created On:</strong> {{ calc.createdOn | date: 'short' }}</p>
+        <p><strong>note:</strong> {{ calc.note }} m</p>
+        
+        <!-- Inner loop: Iterate over each row in the calculation -->
+        <div *ngFor="let row of calc.rows; let x = index">
+          <p>Raamberkening {{x + 1}}</p>
+          <p><strong>Raamomtrek:</strong> {{ row.raamomtrek }}</p>
+          <p><strong>Aantal Ramen:</strong> {{ row.aantalRamen }}</p>
+        </div>
+        
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>
+

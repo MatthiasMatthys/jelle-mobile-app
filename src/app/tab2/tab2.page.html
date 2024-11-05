@@ -7,19 +7,23 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">New calculation</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
   <div class="p-3">
     <div class="row mb-3">
-      <div class="text-end">
-        <button type="button" class="btn btn-primary btn-sm" (click)="addRow()">+</button>
+      <div class="col">
+        <input type="text" class="form-control" placeholder="Titel" [(ngModel)]="title">
+      </div>
+      <div class="col-auto text-end">
+        <button type="button" class="btn btn-primary btn" (click)="addRow()">+</button>
       </div>
     </div>
-    <div *ngFor="let row of rows; let i = index" class="row cloneable-row mb-3">
+    <div class="row mb-3">
+      <div class="col">
+        <label class="form-label">Memo:</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" [(ngModel)]="note" rows="3"></textarea>
+      </div>
+    </div>
+    <div *ngFor="let row of rows; let i = index" class="row cloneable-row" [ngClass]="{'mb-3': i === rows.length - 1}">
       <div class="col">
         <label class="form-label">Raamomtrek:</label>
         <div class="input-group">
@@ -27,25 +31,27 @@
           <span class="input-group-text">m</span>
         </div>
       </div>
-      <div class="col">
+      <div class="col mb-3">
         <label class="form-label">Aantal ramen:</label>
         <input class="form-control" [(ngModel)]="row.aantalRamen" type="number">
       </div>
+      <hr>
     </div>
-    <div class="fixed-bottom row d-flex align-items-center justify-content-between p-2">
-      <div class="col-auto">
-        <button type="button" class="btn btn-primary btn-sm" (click)="calculate()">Calculate</button>
-      </div>
-      <div class="col-auto">
-        <div class="input-group input-group-sm">
-          <label class="form-label pt-2 pe-2">TOTAAL:</label>
-          <input class="form-control custom-width" [(ngModel)]="total" disabled type="number" step=".01">
-          <span class="input-group-text">m</span>
+      <div class="box fixed-bottom row d-flex align-items-center justify-content-between p-2">
+        <div class="col-auto">
+          <button type="button" class="btn btn-primary btn-sm" (click)="calculate()">Calculate</button>
+        </div>
+        <div class="col-auto">
+          <div class="input-group input-group-sm">
+            <label class="form-label pt-2 pe-2">TOTAAL:</label>
+            <input class="form-control custom-width" [(ngModel)]="total" disabled type="number" step=".01">
+            <span class="input-group-text">m</span>
+          </div>
+        </div>
+        <div class="col-auto">
+          <button type="button" class="btn btn-primary btn-sm" [disabled]="total === 0" (click)="save()">Save</button>
         </div>
       </div>
-      <div class="col-auto">
-        <button type="button" class="btn btn-primary btn-sm" (click)="save()">Save</button>
-      </div>
-    </div>
   </div>
+
 </ion-content>

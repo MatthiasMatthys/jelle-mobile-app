@@ -8,10 +8,12 @@ import { Storage } from '@ionic/storage-angular';
 })
 export class Tab2Page {
 
-  total: number = 0
+  total: number = 0;
   rows: Array<{ raamomtrek: number; aantalRamen: number }> = [
     { raamomtrek: 0, aantalRamen: 0 } 
   ];
+  title: string = "";
+  note: string = "";
 
   constructor(private storage: Storage) {
     this.initializeApp();
@@ -34,19 +36,22 @@ export class Tab2Page {
   }
 
   async save() {
-    const rowsWithTotal = [];
+      // Create a single calculation object
+  const calculation = {
+    rows: this.rows, // List of row details
+    total: this.total, // Calculation total
+    title: this.title,
+    note: this.note,
+    createdOn: new Date().toISOString() // or format as needed
+  };
 
-    rowsWithTotal.push({'rows':this.rows, 'total':this.total, 'createdOn':new Date().toISOString()})
-    
-    // Retrieve the existing list of calculations
-    const existingCalculations = (await this.storage.get('calculations')) || [];
-    
-    // Add the new calculation to the list
-    existingCalculations.push(rowsWithTotal);
-    
-    // Save the updated list back to storage
-    await this.storage.set('calculations', existingCalculations);
-    console.log(this.storage.get('calculations'));
-    console.log('Calculation saved:', rowsWithTotal);
+  // Get the existing calculations list from storage
+  const calculations = (await this.storage.get('calculations')) || [];
+
+  // Add the new calculation to the list
+  calculations.push(calculation);
+
+  // Save the updated list back to storage
+  await this.storage.set('calculations', calculations);
   }
 }
