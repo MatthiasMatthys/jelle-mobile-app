@@ -62,34 +62,27 @@ export class Tab2Page implements OnInit{
 
 
   async save() {
-    // Create a single calculation object
     const calculation: Calculation = {
-      rows: this.rows, // List of row details
-      total: this.total, // Calculation total
+      rows: this.rows,
+      total: this.total, 
       title: this.title,
       note: this.note,
-      createdOn: new Date().toISOString() // or format as needed
+      createdOn: new Date().toISOString() 
     };
   
-    // Get the existing calculations list from storage
     const calculations: Calculation[] = (await this.storage.get('calculations')) || [];
   
     if (this.calc) {
-      // If `this.calc` is defined, update the existing record
       const index = calculations.findIndex((c: Calculation) => c.createdOn === this.calc.createdOn);
   
       if (index !== -1) {
-        // Update the existing calculation
         calculations[index] = calculation;
-        console.log('Calculation updated');
       }
     } else {
-      // If `this.calc` is not defined, it's a new calculation, so we add it to the list
       calculations.push(calculation);
       console.log('New calculation added');
     }
   
-    // Save the updated list back to storage
     await this.storage.set('calculations', calculations);
   }
   
@@ -97,6 +90,8 @@ export class Tab2Page implements OnInit{
   ionViewWillLeave() {
     this.total = 0;
     this.rows = [];
+    this.title = "";
+    this.note = "";
     console.log('Tab2 will leave, resetting calc');
     this.calc = null;
   }
@@ -104,9 +99,9 @@ export class Tab2Page implements OnInit{
 }
 
 interface Calculation {
-  rows: any[]; // Adjust the type based on what 'rows' represents
+  rows: any[];
   total: number;
   title: string;
   note: string;
-  createdOn: string; // ISO string format or Date object
+  createdOn: string;
 }

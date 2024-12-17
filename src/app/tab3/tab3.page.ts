@@ -15,7 +15,7 @@ export class Tab3Page {
   }
 
   async initializeApp() {
-    await this.storage.create(); // Reinitializes the storage
+    await this.storage.create();
   }
 
   async ionViewWillEnter() {
