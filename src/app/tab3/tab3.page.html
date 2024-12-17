@@ -20,7 +20,7 @@
         <p><strong>Total:</strong> {{ calc.total }} m</p>
     
         <!-- Edit Button -->
-        <ion-button fill="clear" color="primary" class="edit-button">
+        <ion-button fill="clear" color="primary" class="edit-button" (click)="editCalc(calc)">
           <ion-icon name="create-outline" slot="icon-only"></ion-icon>
         </ion-button>
       </ion-card-content>

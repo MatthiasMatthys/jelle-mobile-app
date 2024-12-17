@@ -1,5 +1,6 @@
 import { Component, NgZone } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab3',
@@ -9,7 +10,7 @@ import { Storage } from '@ionic/storage-angular';
 export class Tab3Page {
   calculations: any[] = [];
 
-  constructor(private storage: Storage, private zone: NgZone) {
+  constructor(private storage: Storage, private zone: NgZone, private router: Router) {
     this.initializeApp();
   }
 
@@ -25,5 +26,10 @@ export class Tab3Page {
       console.log(this.calculations)
     });
   }
+
+  editCalc(calc: any) {
+    this.router.navigate(['/tabs/tab2'], { queryParams: { calc: JSON.stringify(calc) } });
+  }
+  
 
 }

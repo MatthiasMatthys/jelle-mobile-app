@@ -1,6 +1,9 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
+    <ion-title *ngIf="this.calc">
+      Edit calculation
+    </ion-title>
+    <ion-title *ngIf="!this.calc">
       New calculation
     </ion-title>
   </ion-toolbar>
@@ -31,12 +34,21 @@
           <span class="input-group-text">m</span>
         </div>
       </div>
-      <div class="col mb-3">
-        <label class="form-label">Aantal ramen:</label>
-        <input class="form-control" [(ngModel)]="row.aantalRamen" type="number">
+    
+      <div class="col mb-3 d-flex align-items-end">
+        <div class="w-100">
+          <label class="form-label">Aantal ramen:</label>
+          <div class="input-group">
+            <input class="form-control" [(ngModel)]="row.aantalRamen" type="number" disabled>
+            <button type="button" class="btn btn-outline-secondary" (click)="decrementRamen(row)">-</button>
+            <button type="button" class="btn btn-outline-secondary" (click)="incrementRamen(row)">+</button>
+          </div>
+        </div>
       </div>
+    
       <hr>
     </div>
+    
       <div class="box fixed-bottom row d-flex align-items-center justify-content-between p-2">
         <div class="col-auto">
           <button type="button" class="btn btn-primary btn-sm" (click)="calculate()">Calculate</button>
