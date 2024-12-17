@@ -9,22 +9,22 @@
 <ion-content>
   <ion-list>
     <!-- Outer loop: Iterate over each calculation -->
-    <ion-item *ngFor="let calc of calculations; let i = index">
-      <ion-label>
-        <h2>{{calc.title}}</h2>
-        <p><strong>Total:</strong> {{ calc.total }}</p>
-        <p><strong>Created On:</strong> {{ calc.createdOn | date: 'short' }}</p>
-        <p><strong>note:</strong> {{ calc.note }} m</p>
-        
-        <!-- Inner loop: Iterate over each row in the calculation -->
-        <div *ngFor="let row of calc.rows; let x = index">
-          <p>Raamberkening {{x + 1}}</p>
-          <p><strong>Raamomtrek:</strong> {{ row.raamomtrek }}</p>
-          <p><strong>Aantal Ramen:</strong> {{ row.aantalRamen }}</p>
-        </div>
-        
-      </ion-label>
-    </ion-item>
+    <ion-card *ngFor="let calc of calculations; let i = index" class="full-width-card">
+      <ion-card-header class="card-header">
+        <h1 class="card-title">{{ calc.title }}</h1>
+        <p class="date">{{ calc.createdOn | date: 'dd/MM/yyyy, HH:mm' : 'Europe/Brussels' }}</p>
+      </ion-card-header>
+    
+      <ion-card-content>
+        <p *ngIf="calc.note"><strong>Note:</strong> {{ calc.note }}</p>
+        <p><strong>Total:</strong> {{ calc.total }} m</p>
+    
+        <!-- Edit Button -->
+        <ion-button fill="clear" color="primary" class="edit-button">
+          <ion-icon name="create-outline" slot="icon-only"></ion-icon>
+        </ion-button>
+      </ion-card-content>
+    </ion-card>    
   </ion-list>
 </ion-content>
 
