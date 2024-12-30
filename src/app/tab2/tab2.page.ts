@@ -34,7 +34,6 @@ export class Tab2Page implements OnInit{
         this.rows = this.calc.rows;
         this.note = this.calc.note;
         this.title = this.calc.title
-        console.log(this.calc);  // Now you can use 'calc' in your component
       }
     });
   }
@@ -44,7 +43,6 @@ export class Tab2Page implements OnInit{
   }
 
   calculate(){
-    console.log(this.rows);
     this.rows.forEach(calc => {
 
       this.total += calc.raamomtrek * calc.aantalRamen;
@@ -84,15 +82,23 @@ export class Tab2Page implements OnInit{
         }
       } else {
         calculations.push(calculation);
-        console.log('New calculation added');
       }
     
       await this.storage.set('calculations', calculations);
       this.presentSuccesToast();
+
+      this.resetCalculation();
     }
     catch{
       this.presentErrorToast();
     }
+  }
+
+  resetCalculation(){
+    this.rows = [];
+    this.total = 0;
+    this.title = "";
+    this.note = "";
   }
 
   async presentSuccesToast() {
@@ -103,6 +109,8 @@ export class Tab2Page implements OnInit{
       color: 'success',
       icon: 'checkmark-outline'
     });
+
+    await toast.present();
   }
 
   async presentErrorToast() {
@@ -123,7 +131,6 @@ export class Tab2Page implements OnInit{
     this.rows = [];
     this.title = "";
     this.note = "";
-    console.log('Tab2 will leave, resetting calc');
     this.calc = null;
   }
 

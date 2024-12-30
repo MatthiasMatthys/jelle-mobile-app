@@ -24,7 +24,6 @@ export class Tab3Page {
 
     this.zone.run(() => {
       this.calculations = calculations;
-      console.log(this.calculations)
     });
   }
 
