@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
 import { ActivatedRoute, Router  } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab2',
@@ -17,12 +18,12 @@ export class Tab2Page implements OnInit{
   title: string = "";
   note: string = "";
 
-  constructor(private storage: Storage, private route: ActivatedRoute, private router: Router) {
+  constructor(private storage: Storage, private route: ActivatedRoute, private router: Router, private toastController: ToastController) {
     this.initializeApp();
   }
 
   async initializeApp() {
-    await this.storage.create(); // Reinitializes the storage
+    await this.storage.create();
   }
 
   ngOnInit() {
@@ -62,28 +63,58 @@ export class Tab2Page implements OnInit{
 
 
   async save() {
-    const calculation: Calculation = {
-      rows: this.rows,
-      total: this.total, 
-      title: this.title,
-      note: this.note,
-      createdOn: new Date().toISOString() 
-    };
-  
-    const calculations: Calculation[] = (await this.storage.get('calculations')) || [];
-  
-    if (this.calc) {
-      const index = calculations.findIndex((c: Calculation) => c.createdOn === this.calc.createdOn);
-  
-      if (index !== -1) {
-        calculations[index] = calculation;
+
+    try{
+
+      const calculation: Calculation = {
+        rows: this.rows,
+        total: this.total, 
+        title: this.title,
+        note: this.note,
+        createdOn: new Date().toISOString() 
+      };
+    
+      const calculations: Calculation[] = (await this.storage.get('calculations')) || [];
+    
+      if (this.calc) {
+        const index = calculations.findIndex((c: Calculation) => c.createdOn === this.calc.createdOn);
+    
+        if (index !== -1) {
+          calculations[index] = calculation;
+        }
+      } else {
+        calculations.push(calculation);
+        console.log('New calculation added');
       }
-    } else {
-      calculations.push(calculation);
-      console.log('New calculation added');
+    
+      await this.storage.set('calculations', calculations);
+      this.presentSuccesToast();
     }
-  
-    await this.storage.set('calculations', calculations);
+    catch{
+      this.presentErrorToast();
+    }
+  }
+
+  async presentSuccesToast() {
+    const toast = await this.toastController.create({
+      message: 'Calculation saved!',
+      duration: 3000,
+      position: 'top',
+      color: 'success',
+      icon: 'checkmark-outline'
+    });
+  }
+
+  async presentErrorToast() {
+    const toast = await this.toastController.create({
+      message: 'Error during save!',
+      duration: 3000,
+      position: 'top',
+      color: 'danger',
+      icon: 'alert-circle-outline'
+    });
+
+    await toast.present();
   }
   
 
