@@ -90,3 +90,11 @@ input[type="number"] {
   right: 3px;
   font-size: 1.1rem;
 }
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%; /* Make the container take up the full height */
+}
+

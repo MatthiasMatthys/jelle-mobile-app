@@ -9,7 +9,7 @@
 <ion-content>
   <ion-list>
     <!-- Outer loop: Iterate over each calculation -->
-    <ion-card *ngFor="let calc of calculations; let i = index" class="full-width-card">
+    <ion-card *ngFor="let calc of calculations; let i = index" class="full-width-card" (click)="presentDeleteOption(calc, i)">
       <ion-card-header class="card-header">
         <h1 class="card-title">{{ calc.title }}</h1>
         <p class="date">{{ calc.createdOn | date: 'dd/MM/yyyy, HH:mm' : 'Europe/Brussels' }}</p>
@@ -20,7 +20,7 @@
         <p><strong>Total:</strong> {{ calc.total }} m</p>
     
         <!-- Edit Button -->
-        <ion-button fill="clear" color="primary" class="edit-button" (click)="editCalc(calc)">
+        <ion-button fill="clear" color="primary" class="edit-button" (click)="editCalc(calc, $event)">
           <ion-icon name="create-outline" slot="icon-only"></ion-icon>
         </ion-button>
       </ion-card-content>
