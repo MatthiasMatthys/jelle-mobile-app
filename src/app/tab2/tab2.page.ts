@@ -43,6 +43,7 @@ export class Tab2Page implements OnInit{
   }
 
   calculate(){
+    this.total = 0;
     this.rows.forEach(calc => {
 
       this.total += calc.raamomtrek * calc.aantalRamen;

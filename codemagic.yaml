@@ -1,0 +1,23 @@
+workflows:
+  ios_build:
+    name: iOS Build Workflow
+    max_build_duration: 60  # Optional: Limit the build duration (in minutes)
+    environment:
+      vars:
+        # Optional: Define any necessary environment variables (e.g., API keys)
+        - MY_CUSTOM_API_KEY: "value"
+    actions:
+      - script:
+          name: Install npm dependencies
+          script: |
+            npm install  # Install npm dependencies
+      - build:
+          ios:
+            archive: true  # Archive the app to prepare for export
+            build_ios:
+              scheme: "MyApp"  # Replace with your Capacitor app's Xcode scheme
+              configuration: "Release"  # Build in Release mode for production
+              export_method: app-store  # Can be app-store, ad-hoc, or development
+            artifacts:
+              - build/ios/archive/MyApp.xcarchive  # Archived app file
+              - build/ios/ipa/MyApp.ipa  # Final IPA file for distribution
