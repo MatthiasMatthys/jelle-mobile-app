@@ -6,11 +6,11 @@ workflows:
       - name: Install npm dependencies
         script: |
           npm install  # Install npm dependencies
-    build:
-      ios:
-        scheme: "MyApp"  # Replace with your Capacitor app's Xcode scheme
-        configuration: "Release"  # Build in Release mode for production
-        export_method: app-store  # Can be app-store, ad-hoc, or development
-        artifacts:
-          - build/ios/archive/MyApp.xcarchive  # Archived app file
-          - build/ios/ipa/MyApp.ipa  # Final IPA file for distribution
+    # build:
+    #   ios:
+    #     scheme: "MyApp"  # Replace with your Capacitor app's Xcode scheme
+    #     configuration: "Release"  # Build in Release mode for production
+    #     export_method: app-store  # Can be app-store, ad-hoc, or development
+    #     artifacts:
+    #       - build/ios/archive/MyApp.xcarchive  # Archived app file
+    #       - build/ios/ipa/MyApp.ipa  # Final IPA file for distribution
