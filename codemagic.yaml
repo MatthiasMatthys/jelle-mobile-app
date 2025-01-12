@@ -11,7 +11,7 @@ workflows:
       - name: Build the iOS app
         script: |
           npx cap open ios  # Build the iOS app in production release mode
-          npx cap build ios --prod  # Build the iOS app in production release mode
+          npx cap build ios # Build the iOS app in production release mode
 
     artifacts:
       - build/ios/output/*.ipa  # This specifies where to look for the .ipa file
