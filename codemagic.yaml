@@ -2,8 +2,6 @@ workflows:
   ios_build:
     name: iOS Build Workflow
     max_build_duration: 60  # Optional: Limit the build duration (in minutes)
-    environment:
-      platform: macos  # Ensure you're building on macOS
     scripts:
       - name: Install npm dependencies
         script: |
