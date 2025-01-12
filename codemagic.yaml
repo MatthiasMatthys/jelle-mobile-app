@@ -5,12 +5,13 @@ workflows:
     scripts:
       - name: Install npm dependencies
         script: |
-          npm install -g ionic cordova  # Install Ionic and Cordova globally
+          npm install -g @capacitor/cli  # Install Capacitor globally (if not already installed)
           npm install  # Install project-specific npm dependencies
 
       - name: Build the iOS app
         script: |
-          ionic cordova build ios --prod --release  # Build the iOS app in production release mode
+          npx cap open ios  # Build the iOS app in production release mode
+          npx cap build ios --prod  # Build the iOS app in production release mode
 
     artifacts:
       - build/ios/output/*.ipa  # This specifies where to look for the .ipa file
